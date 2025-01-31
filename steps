@@ -1,0 +1,12 @@
+
+https://www.youtube.com/watch?v=U23lNFm_J70
+Curso REACT NATIVE para Principiantes + Aplicación DESDE CERO con Expo
+
+Crear aplicacion con React native
+npx create-expo-app@latest
+
+name
+    example-curso-react-Native
+
+Creacion de repositorio
+git init
