@@ -2,6 +2,8 @@
 https://www.youtube.com/watch?v=U23lNFm_J70
 Curso REACT NATIVE para Principiantes + Aplicación DESDE CERO con Expo
 
+37:22
+
 Crear aplicacion con React native
 npx create-expo-app@latest
 
@@ -18,3 +20,194 @@ git push -u origin main
 
 ya se ha subido a repositorio remoto en rama main
 https://github.com/Ederam/Aplicacion-React/tree/main
+!! Ver este repositorio y si ya esta dentro del otro borrarlo de github !!
+
+https://www.youtube.com/watch?v=U23lNFm_J70
+Curso REACT NATIVE para Principiantes + Aplicación DESDE CERO con Expo
+
+37:22
+
+el proyecto carga con las dependencias necesarias para correr
+
+ejecutar el proyecto
+npm start
+
+por defecto la aplicacion no trae la opcion de abrir en el navegador "Press w │ open web"porque se ha seleccionado template en blanco pero se puede agregar
+activar para poder ver el proyecto en la web
+npx expo install react-dom react-native-web @expo/metro-runtime
+
+para recargar en la consola dar r 
+dando m en la consola se muestra el menu en el dispositivo
+
+los elementos view equivalena un div en react native y estan con display flex por defecto
+y dentro del view para renderizar texto siempre se utiliza Text
+<View style={styles.container}>
+      <Image source={icon} style ={{ width:100, height: 100, resizeMode: 'center' }}/>
+      <Text>Aquí tenemos la app que se muestra!</Text>
+      <StatusBar style="auto" />
+    </View>
+
+los estilos se pueden utilizar dentro del js
+import { StyleSheet, Text, View, Image } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#09f',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+el componente Image para compartir imagenes
+se pueden cargar imagenes de tipo local
+// const icon = require('./assets/icon.png');//Se puede utilizar este o el import
+import icon from './assets/icon.png';
+la diferencia es que en ocasiones con el import al intetar usar la uri de una imagen para cargarla no funciona por lo que su usa mejor el require
+
+<Image source={icon} style ={{ width:100, height: 100, resizeMode: 'center' }}/>
+width:100, height: 100 ==> corresponde al numero de pixeles efectivos para la resolucion efectiva del dispositivo
+
+resizeMode: 'center' depende de lo que se necesite, puede ser (contain, stretch,repeat,etc )
+
+pagina documentacion propiedades y componentes en general
+https://reactnative.dev/docs/image#fadeduration-android
+
+Añadir imagen de la web
+https://www.amazon.es/Legend-Zelda-Breath-Wild/dp/B01MZ977QM/?tag=ec-3029056-21
+se intenta cargar la imagen pero no se ve
+click derecho/copiar direccion de imagen
+https://images.ecestaticos.com/ym2qDY2DcYGfE-XrYC4F4XWKSiI=/0x0:1600x900/592x333/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fc24%2F541%2F71d%2Fc2454171d0b79b7cee8e69b1d2dd1700.jpg
+queda ajustar el tamaño para poderla ver
+
+Git
+echo "# React-native" >> README.md
+git add .
+git commit -m "Carga de imagen desde la web, ajuste de tamaño para visualizacion de la imagen"
+
+Cambiar a visualizacion dark
+a través de un componente que es de expo 
+{/* <StatusBar style="auto" /> no visualiza la hora del dispositivo */}
+      <StatusBar style="light" /> ya visualiza la informacion del dispositivo
+añadir stilo al text para que se visualize
+<Text style={{ color: 'white'}}>Aquí tenemos la app que se muestra!</Text>
+
+Nota!
+se recomienda utilizar el framework de expo mas no el cli de React
+
+echo "# React-native" >> README.md
+git add .
+git commit -m "Cambiar a visualizacion dark, añadir stilo al text"
+
+
+Uso de otros componentes
+adicion de Button
+este componebnte funciona a lo nativo de cada uno de los diferentes dispositivos
+<Button title="Presiona aquí" } />
+se agrega alerta
+<Button title="Presiona aquí" onPress={() => alert('Hola!')} />
+a ese boton no se le pueden agregar estilos porque es un boton nativo, unicamente se le pude agregar color
+Realizar boton personalizado
+Agregar en el import TouchableHighlight
+Documentacion
+https://reactnative.dev/docs/touchablehighlight
+Ejemplo
+<TouchableHighlight
+        underlayColor="#09F"
+        onPress={() => alert('Press a customized button!')}
+        style={{ width:100, height: 100, backgroundColor: 'red', borderRadius: 100,
+          justifyContent: 'center', alignContent: 'center'
+        }}        
+      > 
+      <Text style={{ color: 'white'}}>TOUCH ME!</Text> 
+      </TouchableHighlight>
+Se puede utilizar varios componentes
+Otro ejemplo
+<TouchableOpacity
+        onPress={() => alert('Press a customized button with opacity!')}
+        style={{ width:100, height: 100, backgroundColor: 'red', borderRadius: 100,
+          justifyContent: 'center', alignContent: 'center'
+        }}        
+      > 
+      <Text style={{ color: 'white'}}>TOUCH ME OPACITY!</Text> 
+      </TouchableOpacity>
+
+No se recomienda TouchableWithoutFeedback 
+
+es posible que descontinuene estos tipos de boton por lo que se recomienda el uso de los core "Pressable"
+Documentacion
+https://reactnative.dev/docs/pressable
+
+Uso de Pressable
+Ejemplo
+<Pressable
+          onPress={() => {
+            
+          }}
+          style={({pressed}) => [
+            {
+              backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white',
+            },
+            styles.wrapperCustom,
+          ]}>
+          {({pressed}) => (
+            <Text style={{fontSize: pressed ? 32 : 16}}>{pressed ? 'Pressed!' : 'Press Me'}</Text>
+          )}
+        </Pressable>
+Los Pressable son los mas utilizados y los mas personalizacles
+
+echo "# React-native" >> README.md
+git add .
+git commit -m "adicion de Button, se agrega alerta, Realizar boton personalizado TouchableHighlight y TouchableOpacity, Uso de Pressable"
+
+Añadir Linter
+
+instalar ESLint
+npx expo lint
+presiona y
+esperar a que instale
+
+Instalar prettier
+npx expo install -- --save-dev prettier eslint-config-prettier eslint-plugin-prettier
+salio error
+CommandError: Unexpected: --save-dev
+Did you mean: npx expo install prettier eslint-config-prettier eslint-plugin-prettier -- --save-dev
+
+intento de instlacion con npm
+npm  install prettier eslint-config-prettier eslint-plugin-prettier -- --save-dev
+
+Condigurar prettier
+App Movil\curso-react-native-metacritic-app\.eslintrc.js
+editar original
+// https://docs.expo.dev/guides/using-eslint/
+module.exports = {
+  extends: 'expo',
+  ignorePatterns: ['/dist/*'],
+};
+a
+module.exports = {
+  extends: ['expo','prettier'],
+  plugins: ['prettier'],
+  rules: {
+    "prettier/prettier": "error",
+  }
+};
+
+deberian estar instaladas las extensiones de ESLint y Prettier -  Code formatter
+en caso que no esten instalarlas
+
+Revisar en la configuracion de eslint que este en all la opcion de eslint.codeActionsOnSave.mode
+
+
+https://www.youtube.com/watch?v=U23lNFm_J70
+Curso REACT NATIVE para Principiantes + Aplicación DESDE CERO con Expo
+1:08
+
+echo "# React-native" >> README.md
+git add .
+git commit -m "instalar ESLint, Instalar prettier, Configurar prettier"
+
+git push
+
+No se entiende porque no queda el rastro del archivo App.js en git, por lo que no se va a seguir realizand con el script
+
